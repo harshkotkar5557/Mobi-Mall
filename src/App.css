@@ -1,4 +1,6 @@
 @import url('https://kaizen-ui.netlify.app//styles.css');
+@import url('../src/pages/product/product.css');
+
 .gap-1rem{
     gap: 1rem;
 }
@@ -90,9 +92,11 @@
     width: 60%;
 }
 
-
 .font-w-400{
     font-weight: 400;
+}
+.inline-block{
+    display: inline-block;
 }
 
 

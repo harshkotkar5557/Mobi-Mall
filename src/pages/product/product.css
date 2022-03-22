@@ -1,0 +1,85 @@
+.filtering-option{
+    margin: 0 auto;
+}
+.filtering-option .select-input{
+    cursor: pointer;
+}
+.prize-range{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem auto;
+}
+.range{
+    color: var(--lightGrey);
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+}
+.input-progress{
+    width: 80%;
+    margin: 0.5rem auto;
+}
+
+.content-box{
+    padding: 2rem;
+    flex: 1;
+    background: var(--lynxWhite);
+}
+.product-container{
+    /* margin-top: 1rem; */
+    gap: 1rem;
+    flex-wrap: wrap;
+    height: 75vh;
+    overflow: auto;
+    scroll-margin-top: 1rem;
+    scroll-margin-bottom: 1rem;
+    padding: 1rem 0 2rem 0;
+}
+
+.product-container::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+.shadow{
+    width: 250px;
+    min-width: 200px;
+    padding-bottom: 0;
+    cursor: pointer;
+}
+
+.wishlist-icon{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    box-shadow: 0 0 3px 1px var(--lightGrey);
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 14px;
+}
+.wishlist-icon:hover{
+    transform: scale(1.2);
+    box-shadow: 0 0 3px 2px var(--lightGrey);
+}
+.wishlist-icon > i{
+    margin-top: 4px;
+}
+
+.bagde-on-card{
+    position: absolute;
+    top: 15px;
+    padding: 4px;
+    background: var(--warning);
+    font-weight: 500
+}
+.sold-out{
+    background: var(--black);
+    color: white;
+}
+
+.line-through{
+    text-decoration: line-through;
+}
