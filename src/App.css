@@ -1,4 +1,6 @@
 @import url('https://kaizen-ui.netlify.app//styles.css');
+@import url('../src/pages/auth/login/login.css');
+@import url('../src/pages/auth/signup/signup.css');
 .gap-1rem{
     gap: 1rem;
 }

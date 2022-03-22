@@ -1,0 +1,22 @@
+.login-middle{
+    background: var(--lynxWhite);
+}
+.login-card{
+    padding: 3rem;
+}
+.login-input-box label{
+    font-size: 1rem;
+    display: block;
+}
+.login-input-box input{
+    width: 100%;
+    margin: 0.5rem auto;
+    padding: 0.4em 0.6em;
+    outline: none;
+    border-radius: 3px;
+    border: 2px solid var(--lightGrey);
+}
+.error-msg{
+    font-size: 0.8rem;
+    color: var(--danger);
+}
