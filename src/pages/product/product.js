@@ -2,40 +2,28 @@ import React, { useEffect, useState } from 'react'
 import { products } from '../../data/product.js'
 import { useCart } from '../../context/cart-context'
 import { Cateogery } from '../../data/cateogery'
-
+import {filterByLowHigh, filterByHighLow, getFilterByPrizeRangeVal, getFilterByRatings, getFilterByCateogry } from './utils'
 function Product() {
-    const [ productsList, setProductList ] = useState([])
+    const [productsList, setProductList] = useState([])
     const [cateogeryFilters, setCateogeryFilters] = useState([])
     const [ratingsFilter, setRatingFilter] = useState(null)
     const [prizeRangeFilter, setPrizeRangeFilter] = useState('High-Low')
-    const [ rangeVal, setRangeVal ] = useState(120000)
+    const [rangeVal, setRangeVal] = useState(120000)
 
     const { addTOCart, addWishList } = useCart()
 
     useEffect(() => {
-        getFilterList()
-    },[cateogeryFilters,ratingsFilter,prizeRangeFilter,rangeVal])
+        getFilterProductsList()
+    }, [cateogeryFilters, ratingsFilter, prizeRangeFilter, rangeVal])
 
-    function getFilterList() {
-        let filterProductList = [];
-        let productList = getSortedList(prizeRangeFilter, products)
-        
-        if (cateogeryFilters.length !== 0 && ratingsFilter && rangeVal) {
-            productList.filter((product) => {
-                cateogeryFilters.includes(product.brandName) && ratingsFilter === product.ratings && +product.discountedPrize <= rangeVal && filterProductList.push(product)
-            })
-        }else if (cateogeryFilters.length !== 0 && ratingsFilter) {
-            productList.filter((product) => cateogeryFilters.includes(product.brandName) && ratingsFilter === product.ratings && filterProductList.push(product))
-        } else if (cateogeryFilters.length !== 0) { 
-            productList.filter((product) => cateogeryFilters.includes(product.brandName) && filterProductList.push(product))
-        } else if (ratingsFilter) {
-            productList.filter((product) => ratingsFilter === product.ratings && filterProductList.push(product) )
-        } else if (rangeVal) { 
-            productList.filter((product) => +product.discountedPrize <= rangeVal && filterProductList.push(product) )
-        }else {
-            filterProductList = [...productList]
-        }
-        setProductList(filterProductList)
+
+
+    function getFilterProductsList() {
+        let productsList = getSortedList(prizeRangeFilter, products)
+        let filterList1 = getFilterByPrizeRangeVal(productsList, rangeVal)
+        if (ratingsFilter) { filterList1 = getFilterByRatings(filterList1, ratingsFilter) }
+        if (cateogeryFilters.length !== 0) { filterList1 = getFilterByCateogry(filterList1, cateogeryFilters) }
+        setProductList(filterList1)
     }
 
     function addCateogeryFilters(e, filterType) {
@@ -53,13 +41,8 @@ function Product() {
     }
 
     function getSortedList(type, list) {
-        let sortedList = list.sort((a, b) => {
-            let val;
-            type === "Low-High" ? +a.discountedPrize > +b.discountedPrize ? val = 1 : val = -1 :
-             +a.discountedPrize > +b.discountedPrize ? val= -1 : val=1
-            return val
-        })
-        return sortedList
+        let filterProductList = type === "High-Low" ? filterByHighLow(list) : filterByLowHigh(list);
+        return filterProductList;
     }
 
 
