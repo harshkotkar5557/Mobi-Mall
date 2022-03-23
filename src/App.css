@@ -1,4 +1,5 @@
 @import url('https://kaizen-ui.netlify.app//styles.css');
+@import url('./pages/cart/cart.css');
 .gap-1rem{
     gap: 1rem;
 }
