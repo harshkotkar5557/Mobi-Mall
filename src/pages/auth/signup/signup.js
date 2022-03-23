@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
+
 const Signup = () => {
 
     const [userFormData, setUserFormData] = useState({
@@ -8,14 +10,22 @@ const Signup = () => {
         email: "",
         password: ""
     })
-    const [ passwordError, setPasswordError ] = useState(false)
+    const [passwordError, setPasswordError] = useState(false)
+    const [ isShowPassword, setShowPassword ] = useState(false)
 
     const navigator = useNavigate()
+
+
+    function compareTwoVal(val1, val2) {
+        let isValSame = val1 === val2
+        return isValSame
+    }
 
     function handleFormData(event) {
         event.preventDefault()
         let passValid = checkPasswordComplexity(event.target[2].value.length)
-        if (event.target[2].value.length <= 8 || !passValid) {
+        let isPasswordMatch = compareTwoVal(event.target[2].value, event.target[3].value)
+        if (event.target[2].value.length <= 8 || !passValid || !isPasswordMatch) {
             setPasswordError(true)
             return;
         }
@@ -39,7 +49,7 @@ const Signup = () => {
         <div className="card login-card">
               <h2 className="text-center fa-2x">Signup</h2>
               <form onSubmit={(e) => handleFormData(e)}>
-          <div className="login-input-box m-2rem-t">
+            <div className="login-input-box m-2rem-t">
                 <label htmlFor="userName">Full name</label>
                 <input placeholder="test" id='userName' className='text-input' type="text" required/>
             </div>
@@ -47,11 +57,22 @@ const Signup = () => {
                 <label htmlFor="email">Email address</label>
                 <input placeholder="test@gmail.com" id='email' className='text-input' type="email" required/>
             </div>
-            <div className="login-input-box">
-                <label htmlFor="password">Password</label>
-                <input placeholder="Test@123" id='password' className='text-input' type="password" required />
-                {passwordError && <span className='error-msg'>Password must contain 8 charaters</span>}   
-            </div>
+       
+            <div className="login-input-box position-relative">
+                <label htmlFor="password">Password</label>  
+                <div className='d-flex'>
+                    <input placeholder="Test@123" id='password' className='text-input' type={isShowPassword? "text": 'password'} required />
+                    <span className="text p-l-10 cursor-pointer show-pass" onClick={()=> setShowPassword(!isShowPassword)}><i className={`fa ${isShowPassword? "fa-eye-slash": 'fa-eye'}`} aria-hidden="true"></i></span>
+                </div>     
+                {passwordError && <span className='error-msg'>Password must contain 8 charaters</span>}        
+            </div>   
+            <div className="login-input-box position-relative">
+                <label htmlFor="confrinPassword">Confrim password</label>
+                <div className='d-flex'>
+                    <input placeholder="Test@123" id='confrinPassword' className='text-input' type="password" required />
+                    <span className="text p-l-10 cursor-pointer show-pass" onClick={()=> setShowPassword(!isShowPassword)}><i className={`fa ${isShowPassword? "fa-eye-slash": 'fa-eye'}`} aria-hidden="true"></i></span>
+                </div>           
+            </div>     
             <div className="d-flex p-t-10">
                 <label className="select-input">
                     <input type="checkbox" name="light" 

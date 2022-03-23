@@ -20,3 +20,8 @@
     font-size: 0.8rem;
     color: var(--danger);
 }
+.show-pass{
+    margin: 0.5rem auto;
+    padding: 0.4em 0.6em;
+    background: var(--lightGrey);
+}

@@ -92,11 +92,12 @@
     width: 60%;
 }
 
-
 .font-w-400{
     font-weight: 400;
 }
-
+.d-none{
+    display: none;
+}
 
 
 .navbarOptions i{

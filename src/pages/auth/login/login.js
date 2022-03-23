@@ -32,6 +32,10 @@ const Login = () => {
                     <label htmlFor="password">Password</label>
                     <input placeholder="Test@123" id='password' className='text-input' type="password" required/>
                 </div>
+                <div className="login-input-box">
+                    <label htmlFor="confrinPassword">Confrim password</label>
+                    <input placeholder="Test@123" id='confrinPassword' className='text-input' type="password" required/>
+                </div>
                 <div className="d-flex p-t-10">
                     <label className="select-input">
                     <input type="checkbox" name="light" 
