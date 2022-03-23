@@ -18,6 +18,19 @@ function Product() {
 
 
 
+    function calculateHighestPrize(list) {
+       let findHighPrizeProduct = products.reduce((acc, curr) => {
+            acc = +curr.discountedPrize > +acc.discountedPrize ? +curr.discountedPrize : acc;
+            return acc
+       })
+    }
+
+    function clearAllFilter() {
+        setCateogeryFilters([])
+        setRatingFilter(null)
+        setRangeVal(120000)
+    }
+
     function getFilterProductsList() {
         let productsList = getSortedList(prizeRangeFilter, products)
         let filterList1 = getFilterByPrizeRangeVal(productsList, rangeVal)
@@ -51,7 +64,7 @@ function Product() {
         <div className="sidebar">
             <div className="d-flex justify-around p-5">
                 <h4 className="cursor-pointer">Filters</h4>
-                <p className="border-b-2 cursor-pointer">Clear</p>
+                <p className="border-b-2 cursor-pointer" onClick={clearAllFilter}>Clear</p>
             </div>
             <div className="prize-range">
                 <div className="range" > 
@@ -67,7 +80,7 @@ function Product() {
                       {
                           Cateogery && Cateogery.map((item) => (
                             <label className="select-input m-5" key={item}>
-                            <input type="checkbox" name="light" onChange={(e)=>addCateogeryFilters(e,item)}
+                            <input type="checkbox" name="light" checked={cateogeryFilters.includes(item)} onChange={(e)=>addCateogeryFilters(e,item)}
                             className="checkbox-input" />
                             <span className="text m-5">{item}</span>
                         </label>
@@ -77,22 +90,22 @@ function Product() {
                 <div className="filtering-option">
                     <h2 className="text-center m-5">Ratings</h2>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" onChange={(e) => addRatingsFilter(e,4)}
+                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,4)}
                         className="radio-input" />
                         <span className="text m-5">4 star & above</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" onChange={(e) => addRatingsFilter(e,3)}
+                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,3)}
                         className="radio-input" />
                         <span className="text m-5">3 star</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" onChange={(e) => addRatingsFilter(e,2)}
+                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,2)}
                         className="radio-input" />
                         <span className="text m-5">2 star</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" onChange={(e) => addRatingsFilter(e,1)}
+                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,1)}
                         className="radio-input" />
                         <span className="text m-5">1 star</span>
                     </label>
@@ -100,12 +113,12 @@ function Product() {
                 <div className="filtering-option ">
                     <h2 className="text-center m-5">Sorted by</h2>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" onChange={()=> setPrizeRangeFilter("High-Low")}
+                        <input type="radio" name="light" checked={prizeRangeFilter==="High-Low"} onChange={()=> setPrizeRangeFilter("High-Low")}
                         className="radio-input" />
                         <span className="text m-5">Prize-High to Low</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light"  onChange={ ()=> setPrizeRangeFilter("Low-High")}
+                        <input type="radio" name="light" checked={prizeRangeFilter==="Low-High"}  onChange={ ()=> setPrizeRangeFilter("Low-High")}
                         className="radio-input" />
                         <span className="text m-5">Prize-Low to High</span>
                     </label>
