@@ -140,7 +140,7 @@ function Product() {
                         <div className="card shadow position-relative" key={product.id}>
                             <div className="card_img position-relative" >
                                 <figure >
-                                    <img src="/images/galaxy-s21-5g_fe_color_img04.webp"  alt="tesla_logo" />
+                                    <img src={product.avatar}  alt="tesla_logo" height={250}/>
                                 </figure>
                                 <div className="card_info">
                                     <h3>

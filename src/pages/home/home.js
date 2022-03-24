@@ -12,7 +12,7 @@ function Home() {
           <section class="middle-section">
         <div class="fluid_img home-page-img">
             <img src="images/buyback_offer_banner.png" alt=""/>
-            <span><button class="link-btn outlined get-star-btn" onClick={()=> navigate('/product')}>Shop now</button></span>        
+            <span><button class="link-btn outlined get-star-btn" onClick={()=> navigate('/products')}>Shop now</button></span>        
         </div>
         <h1 class="text-center font-w-400">New arrivals</h1>
         <div class="d-flex flex-wrap gap-1rem align-center justify-center">
