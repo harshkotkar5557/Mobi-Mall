@@ -3,9 +3,6 @@ import Product from './components/Product';
 import { useCart } from '../../context/cart-context'
 import PrizeDetailContainer from './components/PrizeDetailContainer';
 
-
-
-
 const Cart = () => {
     const { cartItem } = useCart()
 
