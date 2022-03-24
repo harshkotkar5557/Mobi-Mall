@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { products } from '../../data/product.js'
 import { useCart } from '../../context/cart-context'
 import { Cateogery } from '../../data/cateogery'
-import {filterByLowHigh, filterByHighLow, getFilterByPrizeRangeVal, getFilterByRatings, getFilterByCateogry } from './utils'
+import { filterByLowHigh, filterByHighLow, getFilterByPrizeRangeVal, getFilterByRatings, getFilterByCateogry } from './utils'
+import { useNavigate } from 'react-router-dom'
+
 function Product() {
     const [productsList, setProductList] = useState([])
     const [cateogeryFilters, setCateogeryFilters] = useState([])
@@ -10,7 +12,9 @@ function Product() {
     const [prizeRangeFilter, setPrizeRangeFilter] = useState('High-Low')
     const [rangeVal, setRangeVal] = useState(120000)
 
-    const { addTOCart, addWishList } = useCart()
+    const { addTOCart, addWishList, cartItem, wishlist, removeFromCart } = useCart()
+
+    const navigator = useNavigate()
 
     useEffect(() => {
         getFilterProductsList()
@@ -145,11 +149,28 @@ function Product() {
                                     <div>Raings: <h4 className='inline-block p-l-5'> {product.ratings} <i className="fa fa-star" aria-hidden="true"></i></h4> </div>
                                     <div className="p-t-5">Prize : <h4 className='line-through inline-block p-l-5'>${product.originalPrize}</h4></div>
                                     <div className="p-t-5">Deal prize : <h4 className="inline-block p-l-5">${product.discountedPrize}</h4></div>
-                                </div>
-                                  <div onClick={() => addWishList(product)} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                                  </div>
+                                  {
+                                      wishlist && wishlist.map((item) => product.id === item.id ?
+                                        <div className="wishlist-icon" key={item.id} ><i className="fa fa-heart" aria-hidden="true"></i></div> :
+                                        <div onClick={() => addWishList(product)} key={item.id} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>)
+                                  }
+                                  {
+                                      wishlist.length === 0 && <div onClick={() => addWishList(product)} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                                  }
                             </div>
-                             <div className="d-flex align-center font_1r justify-around">
-                                <button className="btn primary flex-1" onClick={()=> addTOCart(product)}>Add to cart</button>
+                              <div className="d-flex align-center font_1r justify-around">
+                                  {
+                                      cartItem && cartItem.map((item) => product.id === item.id ? 
+                                          <button className="btn primary flex-1" key={item.id} onClick={() => navigator('/cart')}>Go to cart</button> :
+                                          <button className="btn primary flex-1" key={item.id} onClick={() => addTOCart(product)}>Add to cart</button>
+                                      )
+                                  }
+                                  {
+                                      cartItem.length===0 && <button className="btn primary flex-1" onClick={() => addTOCart(product)}>Add to cart</button>
+
+                                  }
+                                
                             </div>
                       </div>
                       ))
