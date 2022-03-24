@@ -17,7 +17,7 @@ const CartProvider = ({ children }) => {
         setWishlist(addToList(addProduct,wishlist))
     }
 
-    return <CartContext.Provider value={{cartItem, addTOCart, wishlist, addWishList}}>{ children }</CartContext.Provider>
+    return <CartContext.Provider value={{cartItem, addTOCart, wishlist, addWishList, setWishlist}}>{ children }</CartContext.Provider>
 }
 
 const useCart = () => useContext(CartContext)
