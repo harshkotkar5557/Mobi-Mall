@@ -151,26 +151,18 @@ function Product() {
                                     <div className="p-t-5">Deal prize : <h4 className="inline-block p-l-5">${product.discountedPrize}</h4></div>
                                   </div>
                                   {
-                                      wishlist && wishlist.map((item) => product.id === item.id ?
-                                        <div className="wishlist-icon" key={item.id} ><i className="fa fa-heart" aria-hidden="true"></i></div> :
-                                        <div onClick={() => addWishList(product)} key={item.id} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>)
-                                  }
-                                  {
-                                      wishlist.length === 0 && <div onClick={() => addWishList(product)} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                                      wishlist.some((item) => product.id === item.id ) ?
+                                        <div className="wishlist-icon"><i className="fa fa-heart" aria-hidden="true"></i></div> :
+                                        <div onClick={() => addWishList(product)} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>
                                   }
                             </div>
                               <div className="d-flex align-center font_1r justify-around">
                                   {
-                                      cartItem && cartItem.map((item) => product.id === item.id ? 
-                                          <button className="btn primary flex-1" key={item.id} onClick={() => navigator('/cart')}>Go to cart</button> :
-                                          <button className="btn primary flex-1" key={item.id} onClick={() => addTOCart(product)}>Add to cart</button>
-                                      )
-                                  }
-                                  {
-                                      cartItem.length===0 && <button className="btn primary flex-1" onClick={() => addTOCart(product)}>Add to cart</button>
-
-                                  }
-                                
+                                       cartItem.some((item) => product.id === item.id ) ? 
+                                          <button className="btn primary flex-1"  onClick={() => navigator('/cart')}>Go to cart</button> :
+                                          <button className="btn primary flex-1" onClick={() => addTOCart(product)}>Add to cart</button>
+                                      
+                                  }                                
                             </div>
                       </div>
                       ))
