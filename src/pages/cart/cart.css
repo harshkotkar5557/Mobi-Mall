@@ -45,3 +45,6 @@
 .cart-quantity-box{
     padding-top: 0.7rem;
 }
+.object-contain{
+    object-fit: contain;
+}

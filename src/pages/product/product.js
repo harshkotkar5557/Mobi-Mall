@@ -4,15 +4,19 @@ import { useCart } from '../../context/cart-context'
 import { Cateogery } from '../../data/cateogery'
 import { filterByLowHigh, filterByHighLow, getFilterByPrizeRangeVal, getFilterByRatings, getFilterByCateogry } from './utils'
 import { useNavigate } from 'react-router-dom'
+import { useCateogry } from '../../context/cateogryContext'
+
 
 function Product() {
+    const { dispatch, cateogeryList } = useCateogry()
     const [productsList, setProductList] = useState([])
-    const [cateogeryFilters, setCateogeryFilters] = useState([])
+    const [cateogeryFilters, setCateogeryFilters] = useState(cateogeryList)
     const [ratingsFilter, setRatingFilter] = useState(null)
     const [prizeRangeFilter, setPrizeRangeFilter] = useState('High-Low')
     const [rangeVal, setRangeVal] = useState(120000)
 
     const { addTOCart, addWishList, cartItem, wishlist, removeFromCart } = useCart()
+   
 
     const navigator = useNavigate()
 
@@ -20,14 +24,6 @@ function Product() {
         getFilterProductsList()
     }, [cateogeryFilters, ratingsFilter, prizeRangeFilter, rangeVal])
 
-
-
-    function calculateHighestPrize(list) {
-       let findHighPrizeProduct = products.reduce((acc, curr) => {
-            acc = +curr.discountedPrize > +acc.discountedPrize ? +curr.discountedPrize : acc;
-            return acc
-       })
-    }
 
     function clearAllFilter() {
         setCateogeryFilters([])
@@ -94,22 +90,22 @@ function Product() {
                 <div className="filtering-option">
                     <h2 className="text-center m-5">Ratings</h2>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,4)}
+                        <input type="radio" name="light-1" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,4)}
                         className="radio-input" />
                         <span className="text m-5">4 star & above</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,3)}
+                        <input type="radio" name="light-1" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,3)}
                         className="radio-input" />
                         <span className="text m-5">3 star</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,2)}
+                        <input type="radio" name="light-1" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,2)}
                         className="radio-input" />
                         <span className="text m-5">2 star</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,1)}
+                        <input type="radio" name="light-1" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,1)}
                         className="radio-input" />
                         <span className="text m-5">1 star</span>
                     </label>
@@ -152,7 +148,7 @@ function Product() {
                                   </div>
                                   {
                                       wishlist.some((item) => product.id === item.id ) ?
-                                        <div className="wishlist-icon"><i className="fa fa-heart" aria-hidden="true"></i></div> :
+                                        <div className="wishlist-icon"><i style={{color:"red"}} className="fa fa-heart" aria-hidden="true"></i></div> :
                                         <div onClick={() => addWishList(product)} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>
                                   }
                             </div>

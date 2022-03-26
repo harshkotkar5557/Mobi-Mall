@@ -12,7 +12,7 @@ function Product({ product }) {
     <div className="card horizontal-card cart-item-card white-bg">
         <div className="d-flex">
             <div className="w-60p">
-                <img className="h-full object-cover" src={product.avatar} alt={product.modelName}/>
+                <img className="h-full object-contain" src={product.avatar} alt={product.modelName}/>
             </div>     
                 <div className="card_info p-1">
                     <h4 className="font_1r">{product.modelName}</h4>
