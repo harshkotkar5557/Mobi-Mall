@@ -19,7 +19,7 @@ function Product() {
     const [prizeRangeFilter, setPrizeRangeFilter] = useState('High-Low')
     const [rangeVal, setRangeVal] = useState(120000)
 
-    const { addTOCart, addWishList, cartItem, wishlist, } = useCart()
+    const { addTOCart, addWishList, cartItem, wishlist,removeFromWishlist } = useCart()
    
 
     const navigator = useNavigate()
@@ -150,7 +150,7 @@ function Product() {
                                   </div>
                                   {
                                       wishlist.some((item) => product.id === item.id ) ?
-                                        <div className="wishlist-icon"><i style={{color:"red"}} className="fa fa-heart" aria-hidden="true"></i></div> :
+                                        <div className="wishlist-icon" onClick={()=>removeFromWishlist(product.id,wishlist)}><i style={{color:"red"}} className="fa fa-heart" aria-hidden="true"></i></div> :
                                         <div onClick={() => addWishList(product)} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>
                                   }
                             </div>

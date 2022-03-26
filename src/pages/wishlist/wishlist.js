@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useCart } from '../../context/cart-context'
 
 function Wishlist() {
 
-    const { wishlist, addTOCart, setWishlist} = useCart()
+    const { cartItem, wishlist, addTOCart, removeFromWishlist} = useCart()
 
-    const removeFromWishlist = (id,List) => {
-        let newList = List.filter((product) => product.id !== id)
-        setWishlist(newList)
-    }
+    const navigator = useNavigate()
+
+   
 
     return ( 
         <section class="middleSection">
@@ -33,7 +33,14 @@ function Wishlist() {
                                 </div>
                             </div>
                             <div class="d-flex align-center font_1r justify-around" onClick={ ()=> addTOCart(product)} >
-                                <button class="btn primary flex-1">Add to cart</button>
+                                
+                                    {
+                                         cartItem.some((elm) => product.id === elm.id) ?
+                                         <button className="btn primary flex-1"  onClick={() => navigator('/cart')}>Go to cart</button> :
+                                         <button className="btn primary flex-1" onClick={() => addTOCart(product)}>Add to cart</button>
+                                    }
+                                    
+                                    
                             </div>
                         </div>
                         ))
