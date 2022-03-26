@@ -47,9 +47,10 @@ const CartProvider = ({ children }) => {
         setWishlist(addToList(addProduct,wishlist))
     }
 
-   
+
 
     return <CartContext.Provider value={{cartItem, addTOCart, wishlist, addWishList, setCartItem, increaseQuantity,decreaseQuantity,removeFromCart}}>{ children }</CartContext.Provider>
+
 }
 
 const useCart = () => useContext(CartContext)
