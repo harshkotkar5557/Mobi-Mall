@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <nav className="navbar_std">
             <header className="d-flex justify-around align-center ">
-                <div className="brandName" onClick={()=> navigate('/home')}>Mobi-Mall</div>
+                <div className="brandName" onClick={()=> navigate('/')}>Mobi-Mall</div>
                 <div className="searchBar"><i className="fa fa-search"></i><input type="search" placeholder="search"/></div>
                 <div id="hambar" className="hambar"><i className="fa fa-bars" aria-hidden="true"></i></div>
                 <ul className="navbarOptions gap-1rem d-flex d-flex justify-space-bw align-center">

@@ -1,9 +1,12 @@
+
 @import url('https://kaizen-ui.netlify.app//styles.css');
 
 @import url('../src/pages/auth/login/login.css');
 @import url('../src/pages/auth/signup/signup.css');
 
 @import url('../src/pages/product/product.css');
+@import url('./pages/cart/cart.css');
+@import url('./pages/home/home.css');
 
 
 .gap-1rem{
