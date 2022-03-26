@@ -2,28 +2,28 @@ import React, { useEffect, useState } from 'react'
 import { products } from '../../data/product.js'
 import { useCart } from '../../context/cart-context'
 import { Cateogery } from '../../data/cateogery'
-import {filterByLowHigh, filterByHighLow, getFilterByPrizeRangeVal, getFilterByRatings, getFilterByCateogry } from './utils'
+import { filterByLowHigh, filterByHighLow, getFilterByPrizeRangeVal, getFilterByRatings, getFilterByCateogry } from './utils'
+import { useNavigate } from 'react-router-dom'
+import { useCateogry } from '../../context/cateogryContext'
+
+
 function Product() {
+    const { dispatch, cateogeryList } = useCateogry()
     const [productsList, setProductList] = useState([])
-    const [cateogeryFilters, setCateogeryFilters] = useState([])
+    const [cateogeryFilters, setCateogeryFilters] = useState(cateogeryList)
     const [ratingsFilter, setRatingFilter] = useState(null)
     const [prizeRangeFilter, setPrizeRangeFilter] = useState('High-Low')
     const [rangeVal, setRangeVal] = useState(120000)
 
-    const { addTOCart, addWishList } = useCart()
+    const { addTOCart, addWishList, cartItem, wishlist, removeFromCart } = useCart()
+   
+
+    const navigator = useNavigate()
 
     useEffect(() => {
         getFilterProductsList()
     }, [cateogeryFilters, ratingsFilter, prizeRangeFilter, rangeVal])
 
-
-
-    function calculateHighestPrize(list) {
-       let findHighPrizeProduct = products.reduce((acc, curr) => {
-            acc = +curr.discountedPrize > +acc.discountedPrize ? +curr.discountedPrize : acc;
-            return acc
-       })
-    }
 
     function clearAllFilter() {
         setCateogeryFilters([])
@@ -90,22 +90,22 @@ function Product() {
                 <div className="filtering-option">
                     <h2 className="text-center m-5">Ratings</h2>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,4)}
+                        <input type="radio" name="light-1" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,4)}
                         className="radio-input" />
                         <span className="text m-5">4 star & above</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,3)}
+                        <input type="radio" name="light-1" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,3)}
                         className="radio-input" />
                         <span className="text m-5">3 star</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,2)}
+                        <input type="radio" name="light-1" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,2)}
                         className="radio-input" />
                         <span className="text m-5">2 star</span>
                     </label>
                     <label className="select-input m-5">
-                        <input type="radio" name="light" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,1)}
+                        <input type="radio" name="light-1" checked={ratingsFilter? true : false} onChange={(e) => addRatingsFilter(e,1)}
                         className="radio-input" />
                         <span className="text m-5">1 star</span>
                     </label>
@@ -136,7 +136,7 @@ function Product() {
                         <div className="card shadow position-relative" key={product.id}>
                             <div className="card_img position-relative" >
                                 <figure >
-                                    <img src="/images/galaxy-s21-5g_fe_color_img04.webp"  alt="tesla_logo" />
+                                    <img src={product.avatar}  alt="tesla_logo" height={250}/>
                                 </figure>
                                 <div className="card_info">
                                     <h3>
@@ -145,11 +145,20 @@ function Product() {
                                     <div>Raings: <h4 className='inline-block p-l-5'> {product.ratings} <i className="fa fa-star" aria-hidden="true"></i></h4> </div>
                                     <div className="p-t-5">Prize : <h4 className='line-through inline-block p-l-5'>${product.originalPrize}</h4></div>
                                     <div className="p-t-5">Deal prize : <h4 className="inline-block p-l-5">${product.discountedPrize}</h4></div>
-                                </div>
-                                  <div onClick={() => addWishList(product)} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                                  </div>
+                                  {
+                                      wishlist.some((item) => product.id === item.id ) ?
+                                        <div className="wishlist-icon"><i style={{color:"red"}} className="fa fa-heart" aria-hidden="true"></i></div> :
+                                        <div onClick={() => addWishList(product)} className="wishlist-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></div>
+                                  }
                             </div>
-                             <div className="d-flex align-center font_1r justify-around">
-                                <button className="btn primary flex-1" onClick={()=> addTOCart(product)}>Add to cart</button>
+                              <div className="d-flex align-center font_1r justify-around">
+                                  {
+                                       cartItem.some((item) => product.id === item.id ) ? 
+                                          <button className="btn primary flex-1"  onClick={() => navigator('/cart')}>Go to cart</button> :
+                                          <button className="btn primary flex-1" onClick={() => addTOCart(product)}>Add to cart</button>
+                                      
+                                  }                                
                             </div>
                       </div>
                       ))

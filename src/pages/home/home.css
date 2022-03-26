@@ -1,0 +1,12 @@
+.round_img img{
+    width: 10rem;
+    height: 10rem;
+    cursor: pointer;
+}
+.round_img img{
+    border: 2px solid var(--grey);
+}
+
+.round_img img:hover{
+    transform: scale(0.9);
+}
