@@ -6,20 +6,21 @@ import  {products}  from '../../data/product'
 
 
 const ACTION = {
+  ADD_ONE_CATEOGRY: 'add-one-cateogry',
   ADD_CATEOGRY: 'add-cateogry',
   REMOVE_CATEOGRY: 'remove-cateogry',
-  CLEAR_ALL: 'claer-all'
+  CLEAR_ALL: 'clear-all'
 }
 
 function Home() {
   
   const navigate = useNavigate()
 
-  const { dispatch, cateogeryList } = useCateogry()
+  const { dispatch } = useCateogry()
 
   function handleClick(cateogry) {
     navigate('/products')
-    dispatch({ type: ACTION.ADD_CATEOGRY, payload:{ cateogry: cateogry}})
+    dispatch({ type: ACTION.ADD_ONE_CATEOGRY, payload:{ cateogry: cateogry}})
   }
 
   function clearAllFilter() {
@@ -53,10 +54,7 @@ function Home() {
         <div className='d-flex flex-wrap gap-1rem align-center justify-center'>
            <Card product={products[0]} />
            <Card product={products[5]} />
-        </div>
-          
-              
-        
+        </div>    
       </section>
 </div>
   )

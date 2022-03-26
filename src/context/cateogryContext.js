@@ -1,20 +1,22 @@
 import { useContext, createContext, useReducer } from "react";
-import { Cateogery } from "../data/cateogery";
 
 const CateogeryContext = createContext([])
 
 
 const ACTION = {
+    ADD_ONE_CATEOGRY: 'add-one-cateogry',
     ADD_CATEOGRY: 'add-cateogry',
     REMOVE_CATEOGRY: 'remove-cateogry',
-    CLEAR_ALL: 'claer-all'
+    CLEAR_ALL: 'clear-all'
 }
 
 function reducer( state, action ) {
     
     switch (action.type) {
+        case ACTION.ADD_ONE_CATEOGRY:
+            return [action.payload.cateogry]
         case ACTION.ADD_CATEOGRY:
-            return [...state, action.payload.cateogry];
+            return !state.includes(action.payload.cateogry)?[...state, action.payload.cateogry]: state
         case ACTION.REMOVE_CATEOGRY:
             return state.filter((cateogry) => cateogry !== action.payload.cateogry)
         case ACTION.CLEAR_ALL:

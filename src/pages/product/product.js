@@ -6,27 +6,31 @@ import { filterByLowHigh, filterByHighLow, getFilterByPrizeRangeVal, getFilterBy
 import { useNavigate } from 'react-router-dom'
 import { useCateogry } from '../../context/cateogryContext'
 
+const ACTION = {
+    ADD_CATEOGRY: 'add-cateogry',
+    REMOVE_CATEOGRY: 'remove-cateogry',
+    CLEAR_ALL: 'clear-all'
+}
 
 function Product() {
     const { dispatch, cateogeryList } = useCateogry()
     const [productsList, setProductList] = useState([])
-    const [cateogeryFilters, setCateogeryFilters] = useState(cateogeryList)
     const [ratingsFilter, setRatingFilter] = useState(null)
     const [prizeRangeFilter, setPrizeRangeFilter] = useState('High-Low')
     const [rangeVal, setRangeVal] = useState(120000)
 
-    const { addTOCart, addWishList, cartItem, wishlist, removeFromCart } = useCart()
+    const { addTOCart, addWishList, cartItem, wishlist, } = useCart()
    
 
     const navigator = useNavigate()
 
     useEffect(() => {
         getFilterProductsList()
-    }, [cateogeryFilters, ratingsFilter, prizeRangeFilter, rangeVal])
+    }, [ratingsFilter, prizeRangeFilter, rangeVal,cateogeryList])
 
 
     function clearAllFilter() {
-        setCateogeryFilters([])
+        dispatch({ type: ACTION.CLEAR_ALL})
         setRatingFilter(null)
         setRangeVal(120000)
     }
@@ -35,17 +39,15 @@ function Product() {
         let productsList = getSortedList(prizeRangeFilter, products)
         let filterList1 = getFilterByPrizeRangeVal(productsList, rangeVal)
         if (ratingsFilter) { filterList1 = getFilterByRatings(filterList1, ratingsFilter) }
-        if (cateogeryFilters.length !== 0) { filterList1 = getFilterByCateogry(filterList1, cateogeryFilters) }
+        if (cateogeryList.length !== 0) { filterList1 = getFilterByCateogry(filterList1, cateogeryList) }
         setProductList(filterList1)
     }
 
-    function addCateogeryFilters(e, filterType) {
-        let filterList = [...cateogeryFilters]
+    function addCateogeryFilters(e, cateogry) {
         if (e.target.checked) {
-            setCateogeryFilters((filters) => filters.concat(filterType))
+            dispatch({ type: ACTION.ADD_CATEOGRY, payload: { cateogry: cateogry } })
         } else {
-            let removeItemList = filterList.filter((filter) => filter !== filterType)
-            setCateogeryFilters(removeItemList)
+            dispatch({ type: ACTION.REMOVE_CATEOGRY, payload: { cateogry: cateogry } })
         }
     }
 
@@ -80,7 +82,7 @@ function Product() {
                       {
                           Cateogery && Cateogery.map((item) => (
                             <label className="select-input m-5" key={item}>
-                            <input type="checkbox" name="light" checked={cateogeryFilters.includes(item)} onChange={(e)=>addCateogeryFilters(e,item)}
+                            <input type="checkbox" name="light" checked={cateogeryList.includes(item)} onChange={(e)=>addCateogeryFilters(e,item)}
                             className="checkbox-input" />
                             <span className="text m-5">{item}</span>
                         </label>
