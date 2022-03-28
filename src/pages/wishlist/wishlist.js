@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../../context/cart-context'
+import axios from 'axios'
 
 function Wishlist() {
 
@@ -8,7 +9,17 @@ function Wishlist() {
 
     const navigator = useNavigate()
 
-   
+    useEffect(() => {
+        (async () => {
+            try {
+                let res = await axios.get('https://mobi-mall-api.herokuapp.com/users')
+            console.log(res,'users')
+            } catch (error) {
+                console.log(error,'users')
+            }
+            
+        })()
+    })
 
     return ( 
         <section class="middleSection">
