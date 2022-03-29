@@ -1,10 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../../context/cart-context'
+import { useAuth } from '../../context/authContext'
 function Navbar() {
 
-    const navigate = useNavigate()
-    const { cartItem, wishlist } = useCart()
+  const navigate = useNavigate()
+  const { cartItem, wishlist } = useCart()
+  const { isAuth } = useAuth()
 
   return (
     <nav className="navbar_std">
@@ -14,13 +16,13 @@ function Navbar() {
                 <div id="hambar" className="hambar"><i className="fa fa-bars" aria-hidden="true"></i></div>
                 <ul className="navbarOptions gap-1rem d-flex d-flex justify-space-bw align-center">
                     <button id="login-btn" className="link-btn" onClick={()=> navigate('/login')} >Login</button>
-                    <div className="cart-badge cursor-pointer" onClick={()=> navigate('/wishlist')}>
+                    <div className="cart-badge cursor-pointer" onClick={()=> !isAuth ? navigate('/login') : navigate('/wishlist')}>
                             <i className="fa fa-heart-o fa-1x black-color" aria-hidden="true"></i>
                             <div className="notification-icon flex-center">
                               <span>{wishlist.length}</span>
                              </div>
                      </div>
-                    <div className="d-flex gap-1rem cursor-pointer fx-1-25p cart-box" onClick={()=> navigate('/cart')}>
+                    <div className="d-flex gap-1rem cursor-pointer fx-1-25p cart-box" onClick={()=> !isAuth ? navigate('/login') : navigate('/cart')}>
                             <div className="cart-badge ">
                                 <i className = "fa fa-cart-arrow-down fa-1x black-color"></i>
                                 <div className="notification-icon flex-center">

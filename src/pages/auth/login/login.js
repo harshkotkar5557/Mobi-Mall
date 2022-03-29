@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../../context/authContext'
+import axios from 'axios'
 
 const Login = () => {
 
@@ -9,14 +11,26 @@ const Login = () => {
     })
 
     const navigator = useNavigate()
+    const { setAuth } = useAuth()
 
-    function handleFormData(event) {
+    async function handleFormData(event) {
         event.preventDefault()
         let userInfo = {
             email: event.target[0].value,
             password: event.target[1].value
         }
-        setUserFormData(userInfo)
+        try {
+            let res = await axios.get('https://mobi-mall-api.herokuapp.com/users')
+            if (res.data && res.data.some((user) => user.mailId === userInfo.email && user.password === userInfo.password )) {
+                 setAuth(true)
+                navigator('/')
+            } else {
+                console.log('error')
+            }
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
 
   return (

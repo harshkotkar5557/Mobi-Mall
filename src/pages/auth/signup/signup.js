@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import axios from 'axios'
 
 
 const Signup = () => {
@@ -10,8 +10,8 @@ const Signup = () => {
         email: "",
         password: ""
     })
-    const [passwordError, setPasswordError] = useState(false)
-    const [ isShowPassword, setShowPassword ] = useState(false)
+    const [isShowPassword, setShowPassword] = useState(false)
+    const [ errorMsg, setErrorMsg ]= useState('')
 
     const navigator = useNavigate()
 
@@ -21,21 +21,31 @@ const Signup = () => {
         return isValSame
     }
 
-    function handleFormData(event) {
+    async function handleFormData(event) {
         event.preventDefault()
         let passValid = checkPasswordComplexity(event.target[2].value.length)
         let isPasswordMatch = compareTwoVal(event.target[2].value, event.target[3].value)
-        if (event.target[2].value.length <= 8 || !passValid || !isPasswordMatch) {
-            setPasswordError(true)
+        if (!passValid || !isPasswordMatch) {
+            setErrorMsg('something went wrong')
             return;
         }
-        setPasswordError(false)
         let userInfo = {
-            fullName:event.target[0].value,
-            email: event.target[1].value,
+            firstName:event.target[0].value,
+            mailId: event.target[1].value,
             password: event.target[2].value
         }
-        setUserFormData(userInfo)
+        console.log(userInfo)
+        try {
+            let res = await axios.post('https://mobi-mall-api.herokuapp.com/users', userInfo)
+            if (res.status===200) {
+                navigator('/login')
+            } else {
+                console.log('error')
+            }
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     function checkPasswordComplexity(pwd) {
@@ -63,16 +73,16 @@ const Signup = () => {
                 <div className='d-flex'>
                     <input placeholder="Test@123" id='password' className='text-input' type={isShowPassword? "text": 'password'} required />
                     <span className="text p-l-10 cursor-pointer show-pass" onClick={()=> setShowPassword(!isShowPassword)}><i className={`fa ${isShowPassword? "fa-eye-slash": 'fa-eye'}`} aria-hidden="true"></i></span>
-                </div>     
-                {passwordError && <span className='error-msg'>Password must contain 8 charaters</span>}        
+                </div>            
             </div>   
             <div className="login-input-box position-relative">
                 <label htmlFor="confrinPassword">Confrim password</label>
                 <div className='d-flex'>
-                    <input placeholder="Test@123" id='confrinPassword' className='text-input' type="password" required />
+                    <input placeholder="Test@123" id='confrinPassword' className='text-input' type={isShowPassword? "text": 'password'} required />
                     <span className="text p-l-10 cursor-pointer show-pass" onClick={()=> setShowPassword(!isShowPassword)}><i className={`fa ${isShowPassword? "fa-eye-slash": 'fa-eye'}`} aria-hidden="true"></i></span>
                 </div>           
-            </div>     
+                  </div>     
+                  {<p className='error-msg'>{errorMsg}</p>}
             <div className="d-flex p-t-10">
                 <label className="select-input">
                     <input type="checkbox" name="light" 
