@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCateogry } from '../../context/cateogryContext'
 import Card from '../../components/Card'
 import  {products}  from '../../data/product'
+import { useAuth } from '../../context/authContext'
 
 
 const ACTION = {
@@ -14,17 +15,18 @@ const ACTION = {
 
 function Home() {
   
-  const navigate = useNavigate()
+  const navigator = useNavigate()
 
   const { dispatch } = useCateogry()
+  const { isAuth } = useAuth()
 
   function handleClick(cateogry) {
-    navigate('/products')
+    navigator('/products')
     dispatch({ type: ACTION.ADD_ONE_CATEOGRY, payload:{ cateogry: cateogry}})
   }
 
   function clearAllFilter() {
-    navigate('/products')
+    !isAuth ? navigator('/login'): navigator('/products')
     dispatch({ type: ACTION.CLEAR_ALL})
   }
 
@@ -34,16 +36,16 @@ function Home() {
           <h1 class="text-center">Cateogry</h1>
         <div class="d-flex flex-wrap gap-1rem align-center justify-center">
           <div  class="round_img">
-            <img onClick={()=>handleClick('Samsung')} src="./images/samung-logo.jpg" alt="samung-logo"/>
+            <img onClick={()=>!isAuth ? navigator('/login'): handleClick('Samsung')} src="./images/samung-logo.jpg" alt="samung-logo"/>
           </div>    
           <div  class="round_img">
-            <img onClick={()=>handleClick('Iphone')} src="./images/iphone-logo.png" alt="phone-logo"/>
+            <img onClick={()=>!isAuth ? navigator('/login'): handleClick('Iphone')} src="./images/iphone-logo.png" alt="phone-logo"/>
           </div>    
           <div  class="round_img">
-            <img onClick={()=>handleClick('OnePlus')} src="./images/oneplus-logo.jpg" alt="oneplus-logo"/>
+            <img onClick={()=> !isAuth ? navigator('/login'): handleClick('OnePlus')} src="./images/oneplus-logo.jpg" alt="oneplus-logo"/>
           </div>    
           <div  class="round_img">
-            <img onClick={()=>handleClick('Oppo')} src="./images/oppo-logo.webp" alt="oppo-logo"/>
+            <img onClick={()=> !isAuth ? navigator('/login'): handleClick('Oppo')} src="./images/oppo-logo.webp" alt="oppo-logo"/>
           </div>    
         </div>
         <div class="fluid_img home-page-img">

@@ -3,7 +3,7 @@
 
 @import url('../src/pages/auth/login/login.css');
 @import url('../src/pages/auth/signup/signup.css');
-
+@import url('./components/footer/footer.css');
 @import url('../src/pages/product/product.css');
 @import url('./pages/cart/cart.css');
 @import url('./pages/home/home.css');

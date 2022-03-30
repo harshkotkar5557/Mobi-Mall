@@ -7,6 +7,7 @@ import Signup from './pages/auth/signup/signup';
 import Home from './pages/home/home';
 import Wishlist from './pages/wishlist/wishlist';
 import Cart from './pages/cart/cart.js'
+import Footer from './components/footer'
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='products' element={<Product/> }/>
         </Routes>
+        <Footer/>
       </Router>
     </div>
   );

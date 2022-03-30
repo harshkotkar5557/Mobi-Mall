@@ -9,6 +9,7 @@ const Login = () => {
         email: "",
         password: ""
     })
+    const [ errorMsg, setErrorMsg ]= useState('')
 
     const navigator = useNavigate()
     const { setAuth } = useAuth()
@@ -16,16 +17,18 @@ const Login = () => {
     async function handleFormData(event) {
         event.preventDefault()
         let userInfo = {
-            email: event.target[0].value,
+            mailId: event.target[0].value,
             password: event.target[1].value
         }
         try {
             let res = await axios.get('https://mobi-mall-api.herokuapp.com/users')
-            if (res.data && res.data.some((user) => user.mailId === userInfo.email && user.password === userInfo.password )) {
-                 setAuth(true)
-                navigator('/')
+
+            let user = res.data.filter((user) => user.mailId === userInfo.mailId)
+            if (user.length > 0) {
+                setAuth(true)
+                navigator('/products')
             } else {
-                console.log('error')
+                setErrorMsg('something went wrong')
             }
             
         } catch (error) {
@@ -44,18 +47,20 @@ const Login = () => {
                 </div>
                 <div className="login-input-box">
                     <label htmlFor="password">Password</label>
-                    <input placeholder="Test@123" id='password' className='text-input' type="password" required/>
+                    <input placeholder="Test12345" id='password' className='text-input' type="password" required/>
                 </div>
                 <div className="login-input-box">
                     <label htmlFor="confrinPassword">Confrim password</label>
-                    <input placeholder="Test@123" id='confrinPassword' className='text-input' type="password" required/>
+                    <input placeholder="Test12345" id='confrinPassword' className='text-input' type="password" required/>
                 </div>
+                  {<p className='error-msg'>{errorMsg}</p>}
                 <div className="d-flex p-t-10">
                     <label className="select-input">
                     <input type="checkbox" name="light" 
                     className="checkbox-input" value="" />
                     <span className="text p-l-10">Remember me</span>
                 </label>
+              
                 <span className="p-l-10">Forgot password</span>
                 </div>
                 <div className="w-full d-flex p-t-15">

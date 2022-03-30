@@ -6,7 +6,7 @@ function Navbar() {
 
   const navigate = useNavigate()
   const { cartItem, wishlist } = useCart()
-  const { isAuth } = useAuth()
+  const { isAuth,setAuth } = useAuth()
 
   return (
     <nav className="navbar_std">
@@ -14,8 +14,12 @@ function Navbar() {
                 <div className="brandName" onClick={()=> navigate('/')}>Mobi-Mall</div>
                 <div className="searchBar"><i className="fa fa-search"></i><input type="search" placeholder="search"/></div>
                 <div id="hambar" className="hambar"><i className="fa fa-bars" aria-hidden="true"></i></div>
-                <ul className="navbarOptions gap-1rem d-flex d-flex justify-space-bw align-center">
-                    <button id="login-btn" className="link-btn" onClick={()=> navigate('/login')} >Login</button>
+        <ul className="navbarOptions gap-1rem d-flex d-flex justify-space-bw align-center">
+              {
+            !isAuth ? <button id="login-btn" className="link-btn" onClick={() => navigate('/login')} >Login</button> :
+            <button class="btn danger" onClick={()=> setAuth(false)} >Logout</button>
+              }
+                    
                     <div className="cart-badge cursor-pointer" onClick={()=> !isAuth ? navigate('/login') : navigate('/wishlist')}>
                             <i className="fa fa-heart-o fa-1x black-color" aria-hidden="true"></i>
                             <div className="notification-icon flex-center">

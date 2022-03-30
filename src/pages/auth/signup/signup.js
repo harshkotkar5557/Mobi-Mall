@@ -34,17 +34,16 @@ const Signup = () => {
             mailId: event.target[1].value,
             password: event.target[2].value
         }
-        console.log(userInfo)
         try {
             let res = await axios.post('https://mobi-mall-api.herokuapp.com/users', userInfo)
             if (res.status===200) {
                 navigator('/login')
             } else {
-                console.log('error')
+                setErrorMsg('something went wrong')
             }
             
         } catch (error) {
-            console.log(error)
+            setErrorMsg('something went wrong')
         }
     }
 
