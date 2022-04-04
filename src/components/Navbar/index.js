@@ -1,20 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../../context/cart-context'
 import { useAuth } from '../../context/authContext'
 function Navbar() {
 
+  const [ isOpen, setOff ] = useState(false)
   const navigate = useNavigate()
   const { cartItem, wishlist } = useCart()
   const { isAuth,setAuth } = useAuth()
+
+  function toggleNavOptions() {
+    window.innerWidth < 750 ? setOff(!isOpen) : setOff(isOpen)
+  }
 
   return (
     <nav className="navbar_std">
             <header className="d-flex justify-around align-center ">
                 <div className="brandName" onClick={()=> navigate('/')}>Mobi-Mall</div>
                 <div className="searchBar"><i className="fa fa-search"></i><input type="search" placeholder="search"/></div>
-                <div id="hambar" className="hambar"><i className="fa fa-bars" aria-hidden="true"></i></div>
-        <ul className="navbarOptions gap-1rem d-flex d-flex justify-space-bw align-center">
+                <div id="hambar" className="hambar" onClick={toggleNavOptions}><i className="fa fa-bars" aria-hidden="true"></i></div>
+        <ul className="navbarOptions gap-1rem d-flex d-flex justify-space-bw align-center" id={isOpen? 'mobile-navoptions': ''}>
               {
             !isAuth ? <button id="login-btn" className="link-btn" onClick={() => navigate('/login')} >Login</button> :
             <button className="btn danger" onClick={()=> setAuth(false)} >Logout</button>
