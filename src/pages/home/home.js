@@ -26,7 +26,7 @@ function Home() {
   }
 
   function clearAllFilter() {
-    !isAuth ? navigator('/login'): navigator('/products')
+     navigator('/products')
     dispatch({ type: ACTION.CLEAR_ALL})
   }
 
@@ -36,16 +36,16 @@ function Home() {
           <h1 className="text-center">Cateogry</h1>
         <div className="d-flex flex-wrap gap-1rem align-center justify-center">
           <div  className="round_img">
-            <img onClick={()=>!isAuth ? navigator('/login'): handleClick('Samsung')} src="./images/samung-logo.jpg" alt="samung-logo"/>
+            <img onClick={()=>handleClick('Samsung')} src="./images/samung-logo.jpg" alt="samung-logo"/>
           </div>    
           <div  className="round_img">
-            <img onClick={()=>!isAuth ? navigator('/login'): handleClick('Iphone')} src="./images/iphone-logo.png" alt="phone-logo"/>
+            <img onClick={()=> handleClick('Iphone')} src="./images/iphone-logo.png" alt="phone-logo"/>
           </div>    
           <div  className="round_img">
-            <img onClick={()=> !isAuth ? navigator('/login'): handleClick('OnePlus')} src="./images/oneplus-logo.jpg" alt="oneplus-logo"/>
+            <img onClick={()=> handleClick('OnePlus')} src="./images/oneplus-logo.jpg" alt="oneplus-logo"/>
           </div>    
           <div  className="round_img">
-            <img onClick={()=> !isAuth ? navigator('/login'): handleClick('Oppo')} src="./images/oppo-logo.webp" alt="oppo-logo"/>
+            <img onClick={()=>handleClick('Oppo')} src="./images/oppo-logo.webp" alt="oppo-logo"/>
           </div>    
         </div>
         <div className="fluid_img home-page-img">

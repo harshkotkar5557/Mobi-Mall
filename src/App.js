@@ -8,6 +8,7 @@ import Home from './pages/home/home';
 import Wishlist from './pages/wishlist/wishlist';
 import Cart from './pages/cart/cart.js'
 import Footer from './components/footer'
+import ProtechRoute from './components/ProtectedRoute';
 
 
 
@@ -17,12 +18,14 @@ function App() {
       <Router>
       <Navbar/>
         <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route element={<ProtechRoute/>}>
+            <Route path='wishlist' element={<Wishlist/> }/>
+            <Route path='/cart' element={<Cart/> }/>
+            <Route path='products' element={<Product/> }/>
+          </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup/>}/>
-          <Route path='wishlist' element={<Wishlist/> }/>
-          <Route path='/cart' element={<Cart/> }/>
-          <Route path='/' element={<Home/>}/>
-          <Route path='products' element={<Product/> }/>
         </Routes>
         <Footer/>
       </Router>

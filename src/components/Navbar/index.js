@@ -20,13 +20,13 @@ function Navbar() {
             <button className="btn danger" onClick={()=> setAuth(false)} >Logout</button>
               }
                     
-                    <div className="cart-badge cursor-pointer" onClick={()=> !isAuth ? navigate('/login') : navigate('/wishlist')}>
+                    <div className="cart-badge cursor-pointer" onClick={()=> navigate('/wishlist')}>
                             <i className="fa fa-heart-o fa-1x black-color" aria-hidden="true"></i>
                             <div className="notification-icon flex-center">
                               <span>{wishlist.length}</span>
                              </div>
                      </div>
-                    <div className="d-flex gap-1rem cursor-pointer fx-1-25p cart-box" onClick={()=> !isAuth ? navigate('/login') : navigate('/cart')}>
+                    <div className="d-flex gap-1rem cursor-pointer fx-1-25p cart-box" onClick={()=> navigate('/cart')}>
                             <div className="cart-badge ">
                                 <i className = "fa fa-cart-arrow-down fa-1x black-color"></i>
                                 <div className="notification-icon flex-center">

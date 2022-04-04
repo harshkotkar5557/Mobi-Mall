@@ -63,11 +63,12 @@ const Login = () => {
               
                 <span className="p-l-10">Forgot password</span>
                 </div>
-                <div className="w-full d-flex p-t-15">
-                    <button className="btn primary flex-1" type='submit'>Login</button>
+                <div className="w-full d-flex p-t-15 justify-around">
+                      <button className="btn primary" type='submit'>Login</button>
+                      <button className="btn outlined-primary" type='submit' onClick={() => { setAuth(true); navigator('/')}}>Login as guest</button>
                 </div>
-            </form>
-           
+              </form>
+
             <div className="d-flex align-center justify-around p-t-15" onClick={()=>navigator('/signup')}>
                 <span className="text-center cursor-pointer p-t-10" >Create New account <i className="fa fa-arrow-right p-l-5" aria-hidden="true"></i></span>
             </div>
