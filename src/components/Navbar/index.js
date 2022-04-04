@@ -17,7 +17,7 @@ function Navbar() {
         <ul className="navbarOptions gap-1rem d-flex d-flex justify-space-bw align-center">
               {
             !isAuth ? <button id="login-btn" className="link-btn" onClick={() => navigate('/login')} >Login</button> :
-            <button class="btn danger" onClick={()=> setAuth(false)} >Logout</button>
+            <button className="btn danger" onClick={()=> setAuth(false)} >Logout</button>
               }
                     
                     <div className="cart-badge cursor-pointer" onClick={()=> !isAuth ? navigate('/login') : navigate('/wishlist')}>

@@ -32,27 +32,27 @@ function Home() {
 
   return (
   <div>
-      <section class="middle-section">
-          <h1 class="text-center">Cateogry</h1>
-        <div class="d-flex flex-wrap gap-1rem align-center justify-center">
-          <div  class="round_img">
+      <section className="middle-section">
+          <h1 className="text-center">Cateogry</h1>
+        <div className="d-flex flex-wrap gap-1rem align-center justify-center">
+          <div  className="round_img">
             <img onClick={()=>!isAuth ? navigator('/login'): handleClick('Samsung')} src="./images/samung-logo.jpg" alt="samung-logo"/>
           </div>    
-          <div  class="round_img">
+          <div  className="round_img">
             <img onClick={()=>!isAuth ? navigator('/login'): handleClick('Iphone')} src="./images/iphone-logo.png" alt="phone-logo"/>
           </div>    
-          <div  class="round_img">
+          <div  className="round_img">
             <img onClick={()=> !isAuth ? navigator('/login'): handleClick('OnePlus')} src="./images/oneplus-logo.jpg" alt="oneplus-logo"/>
           </div>    
-          <div  class="round_img">
+          <div  className="round_img">
             <img onClick={()=> !isAuth ? navigator('/login'): handleClick('Oppo')} src="./images/oppo-logo.webp" alt="oppo-logo"/>
           </div>    
         </div>
-        <div class="fluid_img home-page-img">
+        <div className="fluid_img home-page-img">
             <img src="images/buyback_offer_banner.png" alt=""/>
-            <span><button class="link-btn outlined get-star-btn" onClick={()=>clearAllFilter() }>Shop now</button></span>        
+            <span><button className="link-btn outlined get-star-btn" onClick={()=>clearAllFilter() }>Shop now</button></span>        
         </div>
-        <h1 class="text-center">New arrivals</h1>
+        <h1 className="text-center">New arrivals</h1>
         <div className='d-flex flex-wrap gap-1rem align-center justify-center'>
            <Card product={products[0]} />
            <Card product={products[5]} />
