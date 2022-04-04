@@ -13,7 +13,6 @@ function Wishlist() {
         (async () => {
             try {
                 let res = await axios.get('https://mobi-mall-api.herokuapp.com/users')
-            console.log(res,'users')
             } catch (error) {
                 console.log(error,'users')
             }
@@ -24,7 +23,7 @@ function Wishlist() {
     return ( 
         <section className="middleSection">
         <div className="content-box">
-            <h3 className="text-center">My wishlist <span>( { wishlist.length} )</span></h3>
+            <h3 className="text-center p-t-15">My wishlist <span>( { wishlist.length} )</span></h3>
                 <div className="product-container d-flex justify-center">
                     {
                         wishlist && wishlist.map((product) => (

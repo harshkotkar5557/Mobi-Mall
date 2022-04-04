@@ -112,7 +112,9 @@
 
 
 
-
+.content-box{
+    padding: 0;
+}
 .navbarOptions i{
     cursor: pointer;
 }
@@ -162,7 +164,6 @@
     top: -6px;
 }
 .sidebar{
-    overflow: auto;
     padding: 0.5rem;
     flex: 1 0;
     flex-basis: 230px;
@@ -180,7 +181,7 @@
 
 .middleSection{
     margin-top: 80px;
-    overflow: hidden;
+    height: 100%;
 }
 .middleSection::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
@@ -210,6 +211,9 @@
     z-index: 999;
     background: white;
     border-radius: 5px;
+}
+.filter-btn{
+    display: none;
 }
 
 @media(max-width:900px){
@@ -257,6 +261,10 @@
     .product-container{
         align-items: center;
         justify-content: center;
+    }
+    .filter-btn{
+        display: block;
+        margin-right: 1rem;
     }
 }
 @media(max-width:450px){

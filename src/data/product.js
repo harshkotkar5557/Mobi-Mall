@@ -69,7 +69,7 @@ const products = [
         brandName: "Iphone",
         description: "17 cm (6.7-inch) Super Retina XDR display with ProMotion for a faster, more responsive fee",
         avatar: "/images/i-13-pro.jpg",
-        originalPrize: "1,19,900",
+        originalPrize: "119900",
         discountedPrize: "107910",
         ratings: 4,
         memoryAndStorage:"128 stroage",

@@ -1,12 +1,11 @@
 
 .footer-container{
-    box-shadow: 0 0 2px 1px var(--grey);
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
-    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 .social-links{
     display: flex;

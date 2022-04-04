@@ -9,7 +9,7 @@ const Cart = () => {
   return (
     <section className="middleSection" id='middleSection'>
         <div className="content-box p-1 ">
-              <h3 className="text-center">My cart <span>({ cartItem.length})</span></h3>
+              <h3 className="text-center p-t-15">My cart <span>({ cartItem.length})</span></h3>
             <div className="cart-main-conatiner flex-wrap">
                   <div className="cart-item-container">
                       {

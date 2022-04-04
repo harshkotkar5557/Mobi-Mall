@@ -45,10 +45,12 @@ function PrizeDetailContainer() {
     list.map((product) => {
         prizeOfitems = product.quantity * Number(product.discountedPrize) + totalDiscount
         totalDiscount = product.quantity * Number(product.originalPrize) + totalDiscount
+        console.log(totalDiscount)
     })
     let prizeDetailList = [...prizingDetail]
     prizeDetailList[0].value = prizeOfitems
     prizeDetailList[1].value = totalDiscount
+    console.log(totalDiscount)
     prizeDetailList[3].value = prizeOfitems + 100
     setPrizingDetail(prizeDetailList)
   }

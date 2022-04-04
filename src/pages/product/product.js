@@ -18,6 +18,7 @@ function Product() {
     const [ratingsFilter, setRatingFilter] = useState(null)
     const [prizeRangeFilter, setPrizeRangeFilter] = useState('High-Low')
     const [rangeVal, setRangeVal] = useState(120000)
+    const [ isOpen, setOff ] = useState(false)
 
     const { addTOCart, addWishList, cartItem, wishlist,removeFromWishlist } = useCart()
    
@@ -60,10 +61,14 @@ function Product() {
         return filterProductList;
     }
 
+    function toogleSidebar() {
+        window.innerWidth < 750 ? setOff(!isOpen) : setOff(isOpen) ;
+    }
+    
 
   return (
     <section className="middleSection">
-        <div className="sidebar">
+        <div className="sidebar" id={isOpen? "mobile-sidebar" : ''}>
             <div className="d-flex justify-around p-5">
                 <h4 className="cursor-pointer">Filters</h4>
                 <p className="border-b-2 cursor-pointer" onClick={clearAllFilter}>Clear</p>
@@ -127,8 +132,12 @@ function Product() {
                 </div>
             </div>
         </div>
-        <div className="content-box">
-              <h3 className="m-1">Showing all products</h3>
+          <div className="content-box">
+              <div className='d-flex align-center'>
+                  <h3 className="m-1">Showing all products</h3>
+                  <button class="btn primary filter-btn" onClick={toogleSidebar}>Filters</button>
+              </div>
+              
               <div className="product-container d-flex">
                   {
                       productsList.length === 0 && <span className='text-center'>No data to show</span>
